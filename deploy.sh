@@ -21,7 +21,7 @@ LimitNOFILE=4096
 WantedBy=multi-user.target
 "
 
-# Build and pload binary
+# Build and upload binary
 GOOS=linux go build -o reverseproxy
 echo "🛠️  reverseproxy built for Linux"
 ssh root@$REMOTE "systemctl stop reverseproxy &>/dev/null"
