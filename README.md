@@ -23,7 +23,7 @@ Place other servers under `/srv/PROJECT_NAME`.
 
 1. Edit `/etc/reverseproxy/hostmap`:
    ```
-   vi /etc/reverseproxy/hostmap
+   sudo vi /etc/reverseproxy/hostmap
    ```
 2. Restart service:
    ```
