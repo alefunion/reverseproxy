@@ -25,7 +25,7 @@ func init() {
 
 Usage:
 
-	Create an /etc/reverseproxy/hostmap file containing host mapping (origin to target, 1 per line).
+	Create an /etc/reverseproxy/hostmap file containing origin to target mapping (1 per line).
 	Example:
 		alefunion.com		localhost:8000
 		api.alefunion.com	localhost:8001
