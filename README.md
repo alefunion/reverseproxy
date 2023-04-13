@@ -18,3 +18,14 @@
 To deploy a new version of `reverseproxy`, rerun `deploy.sh`.
 
 Place other servers under `/srv/PROJECT_NAME`.
+
+## Update hostmap
+
+1. Edit `/etc/reverseproxy/hostmap`:
+   ```
+   vi /etc/reverseproxy/hostmap
+   ```
+2. Restart service:
+   ```
+   sudo systemctl restart reverseproxy
+   ```
