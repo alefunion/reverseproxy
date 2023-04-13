@@ -2,26 +2,19 @@
 
 ## Install
 
-### Locally
+1. Setup an REHL server with SSH key access for `root`.
+2. Run the `deploy.sh` script:
+   ```sh
+   ./deploy.sh
+   ```
+3. When prompted, type the remote address (IP or hostname) of the server.
+4. When prompted, write the `/etc/reverseproxy/hostmap` file.
+   Example:
+   ```
+   alefunion.com		localhost:8000
+   api.alefunion.com	localhost:8001
+   ```
 
-```sh
-GOOS=linux go build
+To deploy a new version of `reverseproxy`, rerun `deploy.sh`.
 
-scp reverseproxy root@x.servers.alefunion.com:/usr/bin
-```
-
-### On server
-
-On server:
-
-```sh
-sudo useradd www
-sudo chown www:www /usr/bin/reverseproxy
-sudo setcap cap_net_bind_service=ep /usr/bin/reverseproxy
-
-sudo install -d -m 0744 /etc/reverseproxy
-sudo vi /etc/reverseproxy/hostmap
-# Write host map:
-#	alefunion.com     localhost:8000
-#	api.alefunion.com localhost:8001
-```
+Place other servers under `/srv/PROJECT_NAME`.

@@ -25,10 +25,10 @@ func init() {
 
 Usage:
 
-	Create a "hostmap" file containing an origin host to target host mapping (1 per line).
+	Create an /etc/reverseproxy/hostmap file containing host mapping (origin to target, 1 per line).
 	Example:
-		alefunion.com     localhost:8000
-		api.alefunion.com localhost:8001
+		alefunion.com		localhost:8000
+		api.alefunion.com	localhost:8001
 
 `)
 		os.Exit(0)
@@ -69,12 +69,5 @@ func main() {
 		proxy.ServeHTTP(w, r)
 	})
 
-	srv := &http.Server{
-		Addr:         ":80",
-		Handler:      handler,
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
-		IdleTimeout:  120 * time.Second,
-	}
-	log.Fatalln(srv.ListenAndServe())
+	log.Fatalln(http.ListenAndServe(":80", http.TimeoutHandler(handler, 1*time.Hour, "")))
 }
