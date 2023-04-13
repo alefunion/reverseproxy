@@ -1,7 +1,10 @@
 #!/bin/bash
 
-echo "Remote host address:"
+echo "Alef Union Reverse Proxy deploy script
+"
+echo "🔗 Remote host address:"
 read REMOTE
+echo
 
 SERVICE="[Unit]
 Description=Alef Union Reverse Proxy
@@ -18,10 +21,12 @@ LimitNOFILE=4096
 WantedBy=multi-user.target
 "
 
-# Upload binary
+# Build and pload binary
 GOOS=linux go build -o reverseproxy
+echo "🛠️  reverseproxy built for Linux"
 ssh root@$REMOTE "systemctl stop reverseproxy &>/dev/null"
-scp reverseproxy root@$REMOTE:/usr/local/sbin
+scp -q reverseproxy root@$REMOTE:/usr/local/sbin
+echo "🚚 reverseproxy uploaded on remote server"
 rm reverseproxy
 
 # Create service
@@ -35,9 +40,11 @@ echo \"$SERVICE\" > /etc/systemd/system/reverseproxy.service;\
 systemctl daemon-reload;\
 systemctl enable reverseproxy;\
 "
+echo "📦 reverseproxy service created on remote server"
 
 # Edit hostmap
-ssh root@$REMOTE -t "vi /etc/reverseproxy/hostmap"
+ssh root@$REMOTE -qt "vi /etc/reverseproxy/hostmap"
 
 # Start service
 ssh root@$REMOTE "systemctl start reverseproxy"
+echo "⚡️ reverseproxy service started"
