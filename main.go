@@ -35,7 +35,7 @@ Usage:
 	}
 
 	// Make hostmap
-	f, err := os.Open("hostmap")
+	f, err := os.Open("/etc/reverseproxy/hostmap")
 	if err != nil {
 		fmt.Println("hostmap file not found")
 		os.Exit(1)
@@ -70,7 +70,7 @@ func main() {
 	})
 
 	srv := &http.Server{
-		Addr:         ":8888",
+		Addr:         ":80",
 		Handler:      handler,
 		ReadTimeout:  5 * time.Second,
 		WriteTimeout: 10 * time.Second,
