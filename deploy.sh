@@ -2,7 +2,7 @@
 
 echo "Alef Union Reverse Proxy deploy script
 "
-echo "🔗 Remote host address:"
+echo "🔗 Remote host (domain or IPv4 only):"
 read REMOTE
 echo
 
